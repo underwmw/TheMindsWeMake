@@ -3,75 +3,462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Minds We Make - Landing Site</title>
-    <!-- You can add your custom CSS file here -->
-    <link rel="stylesheet" href="style.css"> 
+    <title>The Minds We Make - Understanding AI Anthropomorphism</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        header { background-color: #4CAF50; color: white; padding: 1em; text-align: center; }
-        nav { margin-top: 10px; }
-        nav button { background-color: #007bff; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; margin-left: 5px; }
-        nav button:hover { background-color: #0056b3; }
-        main { padding: 20px; max-width: 800px; margin: 20px auto; background-color: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        section { margin-bottom: 20px; }
-        h1, h2, h3, h4 { color: #2E8B57; }
-        .comment-item { border-bottom: 1px solid #eee; padding: 10px 0; }
-        .comment-item:last-child { border-bottom: none; }
-        #commentForm textarea { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; resize: vertical; }
-        #submitCommentButton { background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
-        #submitCommentButton:hover { background-color: #218838; }
-        footer { text-align: center; padding: 1em; background-color: #333; color: white; position: relative; bottom: 0; width: 100%; margin-top: 20px; }
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1a5c3a;
+            --secondary: #4A90E2;
+            --accent: #E94B3C;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-mid: #5a6c7d;
+            --text-light: #95a5a6;
+            --border: #e1e8ed;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-mid);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-mid);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-lg);
+        }
+
+        .content-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .content-card p {
+            color: var(--text-mid);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            margin-top: 3rem;
+        }
+
+        .comment-form {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .comment-form h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .comment-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comment-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .comment-text {
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .comment-pending {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-mid);
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">The Minds We Make</a>
+            <div class="nav-links">
+                <a href="#paper">The Paper</a>
+                <a href="#content">Content</a>
+                <a href="#discussion">Discussion</a>
+            </div>
+            <div class="user-section">
+                <span id="userStatus" class="user-info">Not logged in</span>
+                <button id="loginButton" class="btn btn-primary">Sign In</button>
+                <button id="logoutButton" class="btn btn-secondary hidden">Sign Out</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
         <h1>The Minds We Make</h1>
-        <nav>
-            <span id="userStatus">Not logged in.</span>
-            <button id="loginButton">Sign In with Google</button>
-            <button id="logoutButton" style="display: none;">Sign Out</button>
-        </nav>
-    </header>
+        <p>Exploring the three dimensions of human anthropomorphism in artificial intelligence</p>
+        <div class="hero-buttons">
+            <a href="#paper" class="btn btn-primary">Read the Paper</a>
+            <a href="#content" class="btn btn-secondary">Explore Content</a>
+        </div>
+    </section>
 
-    <main>
-        <section id="welcome">
-            <h2>Welcome to the research hub for 'The Minds We Make'</h2>
-            <p>Exploring human anthropomorphism of AI.</p>
-            <p>Access various documents, deep dives, and discussions.</p>
-        </section>
-
-        <section id="contentPreview">
-            <h3>Featured Content</h3>
-            <p>Here you will find excerpts and links to the main paper, supplementary documents, poems, songs, and more.</p>
-            <!-- Placeholder for dynamic content previews -->
-        </section>
-
-        <section id="discussion" style="display: none;">
-            <h3>Comments and Discussion</h3>
-            <div id="commentsList">
-                <!-- Comments will load here -->
-                <p>Loading comments...</p>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <h2>About the Research</h2>
+                <p>A rigorous examination of how we perceive and relate to AI systems</p>
             </div>
-            <div id="commentForm">
-                <h4>Leave a comment:</h4>
-                <textarea id="commentInput" placeholder="Your comment..."></textarea>
-                <button id="submitCommentButton">Post Comment</button>
+            <div class="content-card">
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    "The Minds We Make" presents a comprehensive framework for understanding anthropomorphism in AI through three analytically distinct dimensions. This research emerged from genuine intellectual collaboration, shaping new perspectives on how humans attribute human-like qualities to artificial intelligence systems.
+                </p>
             </div>
         </section>
-    </main>
 
+        <!-- Content Grid -->
+        <section id="content" style="margin-top: 4rem;">
+            <div class="section-header">
+                <h2>Explore the Content</h2>
+                <p>Dive deeper into the research through various formats</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-card-icon">📄</div>
+                    <h3>The Paper</h3>
+                    <p>Read the full academic article exploring the three dimensions of AI anthropomorphism.</p>
+                    <a href="#" class="btn btn-primary">Read Now</a>
+                </div>
+                <div class="content-card">
+                    <div class="content-card-icon">📚</div>
+                    <h3>Supporting Docs</h3>
+                    <p>Access supplementary research materials and documentation.</p>
+                    <a href="#" class="btn btn-primary">Browse</a>
+                </div>
+                <div class="content-card">
+                    <div class="content-card-icon">🎵</div>
+                    <h3>Songs & Poetry</h3>
+                    <p>Experience the creative expression through music and verse.</p>
+                    <a href="#" class="btn btn-primary">Listen</a>
+                </div>
+                <div class="content-card">
+                    <div class="content-card-icon">🎙️</div>
+                    <h3>Deep Dives</h3>
+                    <p>NotebookLM outputs, podcasts, and extended analysis.</p>
+                    <a href="#" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discussion Section -->
+        <section id="discussion">
+            <div class="section-header">
+                <h2>Join the Discussion</h2>
+                <p>Share your thoughts and engage with the community</p>
+            </div>
+            
+            <div class="comments-section">
+                <div id="commentFormContainer" class="comment-form hidden">
+                    <h3>Leave a Comment</h3>
+                    <textarea id="commentInput" placeholder="Share your thoughts on the research..."></textarea>
+                    <button id="submitCommentButton" class="btn btn-primary">Post Comment</button>
+                </div>
+
+                <div id="loginPrompt" class="comment-form">
+                    <h3>Sign in to join the discussion</h3>
+                    <p style="color: var(--text-mid); margin-bottom: 1rem;">Please sign in with your Google account to leave comments and engage with the community.</p>
+                    <button id="loginButtonComments" class="btn btn-primary">Sign In with Google</button>
+                </div>
+
+                <div id="commentsList">
+                    <div class="loading">Loading comments...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 The Minds We Make</p>
+        <p>&copy; 2026 The Minds We Make | Research on AI Anthropomorphism</p>
     </footer>
 
     <!-- Firebase SDKs -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        // TODO: Add SDKs for other Firebase products that you want to use (e.g., getStorage for Cloud Storage)
-        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVJeTUopIcm-Dt4wjBQ5OHGe_V50hiC9A",
@@ -83,64 +470,69 @@
             appId: "1:931455098510:web:b65af7732778b1363573df"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const adminUID = "Jq0oSLcLrfN996JqiCjHAB5wSnJ3";
 
-        // --- UI Elements ---
+        // UI Elements
         const loginButton = document.getElementById('loginButton');
         const logoutButton = document.getElementById('logoutButton');
+        const loginButtonComments = document.getElementById('loginButtonComments');
         const userStatusSpan = document.getElementById('userStatus');
-        const discussionSection = document.getElementById('discussion');
+        const commentFormContainer = document.getElementById('commentFormContainer');
+        const loginPrompt = document.getElementById('loginPrompt');
         const commentInput = document.getElementById('commentInput');
         const submitCommentButton = document.getElementById('submitCommentButton');
         const commentsList = document.getElementById('commentsList');
 
-        // --- Authentication Logic ---
+        let currentUser = null;
+
+        // Authentication
         onAuthStateChanged(auth, (user) => {
+            currentUser = user;
             if (user) {
-                // User is signed in
-                userStatusSpan.textContent = `Logged in as: ${user.displayName || user.email}`;
-                loginButton.style.display = 'none';
-                logoutButton.style.display = 'inline-block';
-                discussionSection.style.display = 'block'; // Show discussion for logged-in users
+                userStatusSpan.textContent = user.displayName || user.email;
+                loginButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+                commentFormContainer.classList.remove('hidden');
+                loginPrompt.classList.add('hidden');
             } else {
-                // User is signed out
-                userStatusSpan.textContent = 'Not logged in.';
-                loginButton.style.display = 'inline-block';
-                logoutButton.style.display = 'none';
-                discussionSection.style.display = 'none'; // Hide discussion for logged-out users
+                userStatusSpan.textContent = 'Not logged in';
+                loginButton.classList.remove('hidden');
+                logoutButton.classList.add('hidden');
+                commentFormContainer.classList.add('hidden');
+                loginPrompt.classList.remove('hidden');
             }
         });
 
-        loginButton.addEventListener('click', async () => {
+        async function signIn() {
             const provider = new GoogleAuthProvider();
             try {
                 await signInWithPopup(auth, provider);
-                console.log("Signed in successfully!");
             } catch (error) {
                 console.error("Error signing in:", error);
                 alert(`Error signing in: ${error.message}`);
             }
-        });
+        }
+
+        loginButton.addEventListener('click', signIn);
+        loginButtonComments.addEventListener('click', signIn);
 
         logoutButton.addEventListener('click', async () => {
             try {
                 await signOut(auth);
-                console.log("Signed out successfully!");
             } catch (error) {
                 console.error("Error signing out:", error);
                 alert(`Error signing out: ${error.message}`);
             }
         });
 
-        // --- Firestore (Comments) Logic ---
+        // Comments
         submitCommentButton.addEventListener('click', async () => {
-            const user = auth.currentUser;
             const commentText = commentInput.value.trim();
 
-            if (!user) {
+            if (!currentUser) {
                 alert("Please log in to post a comment.");
                 return;
             }
@@ -152,42 +544,52 @@
             try {
                 await addDoc(collection(db, "comments"), {
                     text: commentText,
-                    authorUid: user.uid,
-                    authorName: user.displayName || user.email || 'Anonymous', // Fallback for display name
+                    authorUid: currentUser.uid,
+                    authorName: currentUser.displayName || currentUser.email || 'Anonymous',
                     timestamp: Date.now(),
-                    approved: false // For admin curation, comments are pending by default
+                    approved: false
                 });
-                commentInput.value = ''; // Clear input
-                console.log("Comment submitted for moderation.");
+                commentInput.value = '';
+                alert("Comment submitted for approval!");
             } catch (e) {
-                console.error("Error adding document: ", e);
+                console.error("Error adding comment:", e);
                 alert(`Error posting comment: ${e.message}`);
             }
         });
 
-        // Listen for comments in real-time
-        // Initially, we'll display all comments. Later, you'll update Firestore Security Rules
-        // and potentially this query to only show 'approved: true' comments for regular users.
-        const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+        // Listen for comments
+        const isAdmin = currentUser && currentUser.uid === adminUID;
+        const q = isAdmin 
+            ? query(collection(db, "comments"), orderBy("timestamp", "desc"))
+            : query(collection(db, "comments"), where("approved", "==", true), orderBy("timestamp", "desc"));
+
         onSnapshot(q, (querySnapshot) => {
-            commentsList.innerHTML = ''; // Clear existing comments
+            commentsList.innerHTML = '';
             querySnapshot.forEach((doc) => {
                 const comment = doc.data();
                 const commentElement = document.createElement('div');
                 commentElement.classList.add('comment-item');
+                
+                const isCurrentUserAdmin = currentUser && currentUser.uid === adminUID;
+                const showPending = comment.approved === false && isCurrentUserAdmin;
+                
                 commentElement.innerHTML = `
-                    <p><strong>${comment.authorName}</strong> at ${new Date(comment.timestamp).toLocaleString()}</p>
-                    <p>${comment.text}</p>
-                    ${comment.approved === false ? '<p style="color: orange;">(Pending approval)</p>' : ''}
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.authorName}</span>
+                        <span class="comment-date">${new Date(comment.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <p class="comment-text">${comment.text}</p>
+                    ${showPending ? '<span class="comment-pending">Pending Approval</span>' : ''}
                 `;
                 commentsList.appendChild(commentElement);
             });
+            
             if (querySnapshot.empty) {
-                commentsList.innerHTML = '<p>No comments yet. Be the first!</p>';
+                commentsList.innerHTML = '<p style="text-align: center; color: var(--text-mid);">No comments yet. Be the first to share your thoughts!</p>';
             }
         }, (error) => {
             console.error("Error listening to comments:", error);
-            commentsList.innerHTML = '<p style="color: red;">Failed to load comments.</p>';
+            commentsList.innerHTML = '<p style="color: red; text-align: center;">Failed to load comments.</p>';
         });
     </script>
 </body>
