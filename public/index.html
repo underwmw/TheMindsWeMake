@@ -390,7 +390,7 @@
 
         <!-- The Minds We Make content -->
         <section id="paperContent">
-            <h3>The Minds We Make: Full Paper</h3>
+            <h3></h3>
             <div id="markdownContainer">
                 <p>Loading paper content...</p>
             </div>
@@ -598,11 +598,14 @@ fetchAndDisplayMarkdown('TheMindsWeMake.md');
         });
 
         // Listen for comments
+        /*
         const isAdmin = currentUser && currentUser.uid === adminUID;
         const q = isAdmin 
             ? query(collection(db, "comments"), orderBy("timestamp", "desc"))
             : query(collection(db, "comments"), where("approved", "==", true), orderBy("timestamp", "desc"));
-
+        */
+        const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+        
         onSnapshot(q, (querySnapshot) => {
             commentsList.innerHTML = '';
             querySnapshot.forEach((doc) => {
