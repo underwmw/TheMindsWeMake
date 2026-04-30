@@ -388,6 +388,14 @@
             </div>
         </section>
 
+        <!-- The Minds We Make content -->
+        <section id="paperContent">
+            <h3>The Minds We Make: Full Paper</h3>
+            <div id="markdownContainer">
+                <p>Loading paper content...</p>
+            </div>
+        </section>
+
         <!-- Content Grid -->
         <section id="content" style="margin-top: 4rem;">
             <div class="section-header">
@@ -459,6 +467,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js"; // <-- ADD THIS LINE
+
 
         const firebaseConfig = {
             apiKey: "AIzaSyAVJeTUopIcm-Dt4wjBQ5OHGe_V50hiC9A",
@@ -473,6 +483,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
         const adminUID = "Jq0oSLcLrfN996JqiCjHAB5wSnJ3";
 
         // UI Elements
@@ -485,6 +496,9 @@
         const commentInput = document.getElementById('commentInput');
         const submitCommentButton = document.getElementById('submitCommentButton');
         const commentsList = document.getElementById('commentsList');
+
+        import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+
 
         let currentUser = null;
 
@@ -527,6 +541,32 @@
                 alert(`Error signing out: ${error.message}`);
             }
         });
+
+        // --- Fetch and Display Markdown Content ---
+        const markdownContainer = document.getElementById('markdownContainer');
+
+        async function fetchAndDisplayMarkdown(filePath) {
+            try {
+                const fileRef = ref(storage, filePath);
+                const url = await getDownloadURL(fileRef);
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const markdownText = await response.text();
+
+                // Render markdown to HTML and display it
+                markdownContainer.innerHTML = marked.parse(markdownText);
+            
+            } catch (error) {
+                console.error("Error fetching or rendering markdown:", error);
+                markdownContainer.innerHTML = `<p style="color: red;">Failed to load content: ${error.message}</p>`;
+            }
+        }
+
+// Call this function when the page loads
+fetchAndDisplayMarkdown('TheMindsWeMake.md');
 
         // Comments
         submitCommentButton.addEventListener('click', async () => {
