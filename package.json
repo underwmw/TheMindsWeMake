@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p public && echo 'Build step completed. Serving from public/'"
-
-  },
+    "build": "echo \"Build step merely noted - no complex build needed for static files.\""
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/underwmw/TheMindsWeMake.git"
