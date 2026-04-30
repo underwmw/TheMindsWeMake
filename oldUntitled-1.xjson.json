@@ -1,0 +1,63 @@
+{
+  "name": "mindswemake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Build step merely noted - no complex build needed for static files.\""
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/underwmw/TheMindsWeMake.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/underwmw/TheMindsWeMake/issues"
+  },
+  "homepage": "https://github.com/underwmw/TheMindsWeMake#readme"
+}
+
+{
+  "name": "TheMindsWeMake",
+  "version": "1.0.0",
+  "description": "Landing site for 'The Minds We Make' paper and associated content, built with Firebase.",
+  "main": "public/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p public && echo \"Static files are managed in 'public' directly, no complex compilation yet.\"",
+    "serve": "firebase emulators:start --only hosting",
+    "deploy": "firebase deploy --only hosting"
+  },
+  "keywords": ["Firebase", "Web", "TypeScript", "JavaScript", "Hosting", "Firestore", "Authentication"],
+  "author": "underwmw",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.12.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
+
+{
+  "name": "TheMindsWeMake",
+  "version": "1.0.0",
+  "description": "Landing site for 'The Minds We Make' paper and associated content, built with Firebase.",
+  "main": "public/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Build step merely noted - no complex build needed for static files.\"",
+    "serve": "firebase emulators:start --only hosting",
+    "deploy": "firebase deploy --only hosting"
+  },
+  "keywords": ["Firebase", "Web", "JavaScript", "Hosting", "Firestore", "Authentication"],
+  "author": "underwmw",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.12.2"
+  }
+}
